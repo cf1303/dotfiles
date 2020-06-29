@@ -1,0 +1,99 @@
+# Configuration file for obdevicemenu.
+
+# Place in /etc/obdevicemenu.conf for system wide configuration.
+# Place in ~/.config/obdevicemenu/config for per-user configuration.
+# XDG_CONFIG_HOME is respected if it has been set.
+
+# Set filemanager command. The mount point is passed as the first argument.
+filemanager="/bin/pcmanfm"
+#filemanager="/usr/bin/pcmanfm"
+
+# Set whether notifications will be shown. This can be "0" or "1".
+show_notifications=1
+
+# Set notification command path and options to pass. These are only used if
+# show_notifications is set to "1". The messages are passed to this command
+# as the final argument. notify_options can be left blank if you do not need
+# to pass any options to the notification command.
+notify="/usr/bin/notify-send"
+notify_options="--expire-time=3000"
+
+# Set optical device location. This string is matched using grep like so:
+# udisks --enumerate | grep -ow ${optical_devices} | sort
+# If you wish to do more complicated matches, the string can be modified to
+# include grep options, such as setting it to "-e sr0 -e sr[2-9]". This
+# allows more control over which devices are processed/ignored by the menu.
+#optical_devices="sr[0-9]*"
+#optical_devices="-E ^/dev/sr[0-9]+"
+
+# Set removable devices location. The default is to ignore /dev/sda*, which is
+# usually the primary system drive. This string is matched using grep like so:
+# udisks --enumerate | grep -ow ${removable_devices} | sort
+# If you wish to do more complicated matches, the string can be modified to
+# include grep options, such as setting it to "-e sdb[0-9]* -e sdc1". This
+# allows more control over which devices are processed/ignored by the menu.
+removable_devices="-E ^/dev/sd[a-z][0-9]*|^/dev/mmcblk[0-9]+p*[0-9]*"
+# old config below
+#removable_devices="sd[b-z]*[0-9]*"
+#removable_devices="mmc[a-z]*[0-9]*"
+
+###
+### This example also includes LUKS encrypted partitions:
+### removable_devices="-E ^/dev/sd[b-z][0-9]*|^/dev/mmcblk[0-9]+p*[0-9]*|^/dev/dm-[0-9]+"
+###
+### This example also includes LUKS encrypted partitions but hides /dev/dm-0 to
+### /dev/dm-7 which are system partitions:
+### removable_devices="-E ^/dev/sd[b-z][0-9]*|^/dev/dm-[8-9]|^/dev/dm-[1-9][0-9]+"
+###
+### This example also includes floppy drives (note that the device will always
+### be shown whether or not there is a floppy disk inserted):
+### removable_devices="-E ^/dev/sd[b-z][0-9]*|^/dev/fd[0-9]+"
+###
+
+
+# Do not show internal devices. This can be "0" or "1". If you have system
+# drives that are always found at the same location (e.g. /dev/sda), it is
+# better and faster to hide them using the "removable_devices" option above.
+show_internal="0"
+
+# Set whether to show the device filename in the menu. This can be "0" or "1".
+# Example: If this is set to "1" then the menu entry will show "sdb1: Cruzer",
+# while if this is set to "0" then the menu entry will only show "Cruzer".
+show_removable_device_filename="0"
+show_optical_device_filename="1"
+
+# Set whether to sort devices more thoroughly. This can be "0" or "1".
+# This option is basically a big hack to get around a shortcoming of the sort
+# command, which causes /dev/sdc11 to be shown in the menu before /dev/sdc2.
+# It will deal with /dev/sd* and /dev/dm-* devices, but not /dev/mmcblk* as
+# the sorting is not really that simple. It is a big hack so if you enable it
+# then i can make no promises that it will be fast or bug free.
+fancy_sort="0"
+
+# Set custom commands to be run automatically after mounting or unmounting.
+# This is useful for spinning down a hard drive after unmounting it. The
+# device name (e.g. /dev/sdb1) is passed as the first and only argument.
+# Uncomment the examples below, or modify them to pass any arbitrary commands.
+# post_mount is run immediately after a successful mount operation, and
+# post_unmount is run immediately after a successful unmount operation.
+# Note that these examples date from UDISKS not UDISKS2.
+
+# Set "run_post_mount" to "0" to disable or "1" to enable.
+run_post_mount="1"
+
+# This example uses udisks to set the spindown timeout after mounting.
+#post_mount() {
+#	udisks --set-spindown ${1} --spindown-timeout 240
+#}
+
+# Set "run_post_unmount" to "0" to disable or "1" to enable.
+run_post_unmount="1"
+
+# This example uses udisks to set the spindown timeout after unmounting.
+#post_unmount() {
+#	udisks --set-spindown ${1} --spindown-timeout 240
+#}
+
+# Set default mount options for Udisks.
+# These don't really work right now.
+#mount_options="--mount-options nosuid,noexec,noatime"

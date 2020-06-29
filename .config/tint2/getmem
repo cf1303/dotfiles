@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo Mem: $(free -m | grep Mem | cut -b 28-31)MB

@@ -1,0 +1,7 @@
+tint2 &
+#tint2 -c ~/.config/tint2/tint2rcBOTTOM &
+nitrogen --restore &
+picom --config ~/.config/picom/picom.conf --experimental-backends &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+dunst &
+export PATH=/home/cf/.local/bin:$PATH

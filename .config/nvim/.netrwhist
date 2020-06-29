@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/cf/.config/alacritty'
+let g:netrw_dirhist_4='/home/cf/.config/tint2'
+let g:netrw_dirhist_3='/etc/iptables'
+let g:netrw_dirhist_2='/home/cf/.themes/Storm/openbox-3'
+let g:netrw_dirhist_1='/home/cf/.config/nvim'
