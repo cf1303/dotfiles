@@ -1,3 +1,0 @@
-https://github.com/adi1090x/rofi.git // goes to ~/.config/rofi/
-https://github.com/turquoise-hexagon/cherry.git // run the shell script to make it
-https://github.com/tryone144/compton.git //compton fork with dual kawase blur
