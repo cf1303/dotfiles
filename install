@@ -1,0 +1,8 @@
+#!/bin/sh
+
+git clone https://github.com/turquoise-hexagon/cherry.git
+git clone https://github.com/tryone144/compton.git
+git clone https://github.com/adi1090x/rofi.git
+
+
+mv rofi ~/.config/rofi/
